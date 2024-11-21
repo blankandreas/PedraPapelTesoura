@@ -1,13 +1,16 @@
 console.log("Hello World!")
+let humanScore = 0
+let computerScore = 0
+let empate = 0
 
+for (var i = 0; i < 6; i++){
 
 function GetComputerChoice(x){
     return Math.floor(Math.random()*x)
     
 }
 let choice = GetComputerChoice(3);
-    console.log ("Escolha randomica do computador")
-    console.log (choice)
+ 
 
 
 
@@ -39,34 +42,69 @@ function numeral(escolha){
 /* console.log (numeral(escolha)) */
 let humanchoice = numeral(escolha)
 console.log (humanchoice)
+   console.log ("Escolha randomica do computador")
+    console.log (choice)
+
 
 
 function playRound (humanchoice, choice){
     if (humanchoice === choice){
-         return  "Rodada Empatada, Joque novamente";
+       return  "Empate";
     }
     else if (humanchoice === 0){
-        if (choice === 1){
-            return  " Computador venceu. Pedra perde para Papel"
-        }
+        if (choice === 1)
+            return  "Computador venceu"
+        
         else if (choice === 2)
-            return  " Voce venceu!! Pedra ganha de Tesoura"
+            return  "Voce venceu"
+        
     }
     else if (humanchoice === 1){
-        if (choice === 2){
-            return  " Computador venceu. Papel perde de Tesoura"
-        }
+        if (choice === 2)
+            return  "Computador venceu"
+        
         else if (choice === 0)
-            return  " Voce venceu!! Papel ganha de Pedra"
-    }
-    else if (humanchoice === 2){
-        if (choice === 0){
-            return  " Computador venceu. Tesoura perde de Pedra"
+            return  "Voce venceu"
         }
+    
+    else if (humanchoice === 2){
+        if (choice === 0)
+            return  "Computador venceu"
+        
         else if (choice === 1)
-            return  " Voce venceu!! Tesoura ganha de Papel"
+            return  "Voce venceu"
+        
     }
      
 } 
-console.log (playRound(humanchoice, choice))
+/* console.log (playRound(humanchoice, choice)) */
+let resultado = playRound(humanchoice, choice)
+/* console.log (resultado) */
+
+if (resultado === "Empate"){
+    empate++}
+    else if (resultado === "Voce venceu"){
+    humanScore++}
+    else if (resultado === "Computador venceu"){ 
+    computerScore++}
+
+
+
+
+console.log ("humano",humanScore, "empate", empate,"computador", computerScore)
+console.log ("Jogo", i, "de 5" )
+}
+  
+
+if (humanScore>computerScore){
+    console.log("Voce é o vencedor final!!!")
+}
+else if (humanScore<computerScore){
+    console.log("O Computador venceu!!!")
+}
+else if (humanScore===computerScore){
+    console.log ("EMPATE")
+}
+
+
 
