@@ -1,110 +1,138 @@
 console.log("Hello World!")
-let humanScore = 0
-let computerScore = 0
-let empate = 0
 
-for (var i = 0; i < 6; i++){
 
-function GetComputerChoice(x){
-    return Math.floor(Math.random()*x)
-    
-}
-let choice = GetComputerChoice(3);
+const playerPoints = document.getElementById('pontosH');
+const computerPoints = document.getElementById('pontosC')
+const resultadoParcial = document.getElementById('resultado')
+const escolhaHumano= document.getElementById('eh')
+const escolhaComputador = document.getElementById('ec')
+const pontosFinal = document.getElementById('pontosFinal')
+const humanChoiceR = document.querySelector(".btnR")
+const humanChoiceP = document.querySelector(".btnP")
+const humanChoiceT = document.querySelector(".btnT")
+
+   
  
+    
+    humanChoiceR.addEventListener("click", ()=>playRound(0));
+    humanChoiceP.addEventListener("click", ()=>playRound(1))
+    humanChoiceT.addEventListener("click", ()=>playRound(2))
 
+    let playerScore = 0   
+    let computerScore = 0
+    let empate = 0
+   
 
+    const isGameOver = () => playerScore+computerScore+empate === 5;
+    
 
-let escolha = prompt("Escolha entre Pedra, Papel ou Tesoura");
-console.log ("Escolha do humano")
-/* console.log(escolha)
-console.log ("Transição para UpperCase") */
-function getHumanChoice(escolha){
-    return escolha.toUpperCase()
+    function final (){
+/*         console.log("Player score:", playerScore) */
+        playerPoints.textContent = "Seus score: " + playerScore;
+/*         console.log("Computer score:", computerScore) */
+        computerPoints.textContent ="Computador score: " +  computerScore;
+/*         console.log("Empate:", empate) */
 
- }
-    escolha = getHumanChoice(escolha);
-  /*   console.log (escolha) */
-
-
-/* console.log ("Transição para numeral") */
-function numeral(escolha){
-    if (escolha === "PEDRA"){
-    return 0 
+        if (playerScore === computerScore){
+            console.log ("Empate Final")
+            pontosFinal.textContent = "Empate Final"
+        }
+            else if (playerScore < computerScore){
+            pontosFinal.textContent = "Vencedor final Computador"
+        }
+            else if (playerScore > computerScore){
+            pontosFinal.textContent = "Vencedor final VOCÊ"
+            }
+            
+      
     }
-    else if (escolha ==="PAPEL"){
-        return 1
-    }
-    else if (escolha ==="TESOURA"){
-        return 2
-    }
-}
-
-/* console.log (numeral(escolha)) */
-let humanchoice = numeral(escolha)
-console.log (humanchoice)
-   console.log ("Escolha randomica do computador")
-    console.log (choice)
-
-
-
-function playRound (humanchoice, choice){
-    if (humanchoice === choice){
-       return  "Empate";
-    }
-    else if (humanchoice === 0){
-        if (choice === 1)
-            return  "Computador venceu"
+  
         
-        else if (choice === 2)
-            return  "Voce venceu"
-        
+         
+    
+function playRound (humanChoice){
+    
+   
+    computerPoints.textContent ="Computador score: " +  computerScore;
+    playerPoints.textContent = "Seus score: " + playerScore;
+/*     console.log("Player score:", playerScore)
+    console.log("Computer score:", computerScore)
+    console.log("Empate:", empate) */
+/*     let soma = playerScore+computerScore+empate */
+    /* console.log("Soma:",soma) */
+    let computerChoice = Math.floor(Math.random()*3)
+/*     console.log ("Escolha randomica do computador, humano")
+    console.log (computerChoice, humanChoice) */
+
+
+    
+    if (humanChoice === computerChoice){
+/*        let resultado = "empate"  */
+/*        console.log(resultado); */
+       resultadoParcial.textContent = "EMPATE"
+       empate++
     }
-    else if (humanchoice === 1){
-        if (choice === 2)
-            return  "Computador venceu"
+        else if (humanChoice === 0){
+            escolhaHumano.textContent = "Pedra"
+            if (computerChoice === 1){
+            let resultado = "Computador venceu"
+            console.log(resultado)
+            resultadoParcial.textContent = "Pedra perde de Papel -> Computador Venceu!";
+            computerScore++
+            escolhaComputador.textContent = "Papel"
+             
+            }
+            else if (computerChoice === 2){
+            let resultado = "Voce venceu"
+            console.log(resultado)
+            resultadoParcial.textContent = "Pedra ganha de Tesoura -> Você Venceu!!";
+            playerScore++
+            escolhaComputador.textContent = "Tesoura"
+            }
+        }
+
+        else if (humanChoice === 1){
+            escolhaHumano.textContent = "Papel"
+            if (computerChoice === 2){
+            let resultado = "Computador venceu"
+            console.log(resultado)
+            resultadoParcial.textContent = "Papel perde de Tesoura -> Computador venceu!";
+            computerScore++ 
+            escolhaComputador.textContent = "Tesoura"
+           
+            }   
         
-        else if (choice === 0)
-            return  "Voce venceu"
+            else if (computerChoice === 0){
+            let resultado = "Voce venceu"
+            console.log(resultado)
+            resultadoParcial.textContent = "Papel ganha de Pedra ->Você Venceu!";
+            playerScore++ 
+            escolhaComputador.textContent = "Pedra"    
+        
+            }
         }
     
-    else if (humanchoice === 2){
-        if (choice === 0)
-            return  "Computador venceu"
+        else if (humanChoice === 2){
+            escolhaHumano.textContent = "Tesoura"
+            if (computerChoice === 0){
+            let resultado = "Computador venceu"
+            console.log(resultado)
+            resultadoParcial.textContent = "Tesoura perde de Pedra - Computador Venceu!";
+            computerScore++
+            escolhaComputador.textContent = "Pedra"
+            } 
         
-        else if (choice === 1)
-            return  "Voce venceu"
-        
-    }
+            else if (computerChoice === 1){
+            let resultado = "Voce venceu"
+            console.log(resultado)
+            resultadoParcial.textContent = "Tesoura ganha de Papel -> Você Venceu!"
+            playerScore++
+            escolhaComputador.textContent = "Papel"
+            }     
+        }
+        if(isGameOver()) {
+            final();
+        } 
      
-} 
-/* console.log (playRound(humanchoice, choice)) */
-let resultado = playRound(humanchoice, choice)
-/* console.log (resultado) */
-
-if (resultado === "Empate"){
-    empate++}
-    else if (resultado === "Voce venceu"){
-    humanScore++}
-    else if (resultado === "Computador venceu"){ 
-    computerScore++}
-
-
-
-
-console.log ("humano",humanScore, "empate", empate,"computador", computerScore)
-console.log ("Jogo", i, "de 5" )
+       
 }
-  
-
-if (humanScore>computerScore){
-    console.log("Voce é o vencedor final!!!")
-}
-else if (humanScore<computerScore){
-    console.log("O Computador venceu!!!")
-}
-else if (humanScore===computerScore){
-    console.log ("EMPATE")
-}
-
-
-
